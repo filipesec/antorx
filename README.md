@@ -1,8 +1,8 @@
 # Antorx
 
-O **Antorx** é uma ferramenta de automação de navegador, desenvolvida em Python + Selenium, para auxiliar o preenchimento sequencial da tela **Relação de Passageiros (Passo 2)** do sistema SISAUT/ANTT.
+O **Antorx** é uma ferramenta de automação de navegador desenvolvida em Python e Selenium para auxiliar o preenchimento sequencial da tela **Relação de Passageiros (Passo 2)** do sistema SISAUT/ANTT.
 
-> **Importante:** `passengers.example.csv` contém apenas dados fictícios. Por segurança, o programa bloqueia o envio desse arquivo ao portal. Para um cadastro real autorizado, prepare um arquivo local chamado `passageiros.csv`, revise os dados e mantenha esse arquivo fora do Git.
+> **Importante:** `passengers.example.csv` contém apenas dados fictícios. O programa bloqueia o uso direto desse arquivo para o cadastro. Para um cadastro real autorizado, crie um arquivo local chamado `passageiros.csv`, revise os dados e mantenha-o fora do Git.
 
 > **Projeto independente:** este repositório não é oficial, afiliado, patrocinado ou endossado pela ANTT. Verifique as regras aplicáveis ao sistema e obtenha autorização antes de usar a automação.
 
@@ -111,7 +111,7 @@ Com o ambiente virtual criado, execute:
 
 ## Preparar a lista CSV
 
-O arquivo `passengers.example.csv` é apenas uma demonstração e o programa bloqueia seu envio. Crie uma cópia local chamada **`passageiros.csv`** e substitua os marcadores fictícios pelos dados corretos.
+O arquivo `passengers.example.csv` é apenas uma demonstração e o programa bloqueia seu uso direto para o cadastro. Crie uma cópia local chamada **`passageiros.csv`** e substitua os marcadores fictícios pelos dados corretos.
 
 **Windows (PowerShell):**
 
@@ -119,7 +119,7 @@ O arquivo `passengers.example.csv` é apenas uma demonstração e o programa blo
 Copy-Item passengers.example.csv passageiros.csv
 ```
 
-**MacOS/Linux:**
+**macOS/Linux:**
 
 ```bash
 cp passengers.example.csv passageiros.csv
@@ -129,23 +129,23 @@ Edite `passageiros.csv` localmente. O `.gitignore` ignora esse arquivo e os dema
 
 ### Formato do arquivo
 
-O arquivo deve usar codificação **UTF-8**, separador **ponto e vírgula (`;`)** e uma linha de cabeçalho. Os nomes das colunas do formato recomendado estão em inglês:
+O arquivo deve usar codificação **UTF-8**, separador **ponto e vírgula (`;`)** e uma linha de cabeçalho. Use estas colunas:
 
 ```csv
-original_order;name;document
-1;fictional passenger 01;DOCUMENT_PLACEHOLDER_DO_NOT_SUBMIT
-2;fictional passenger without document;
+name;document
+fictional passenger 01;DOCUMENT_PLACEHOLDER_DO_NOT_SUBMIT
+fictional passenger 02;DOCUMENT_PLACEHOLDER_DO_NOT_SUBMIT
+fictional passenger without document;
 ```
 
-O texto `DOCUMENT_PLACEHOLDER_DO_NOT_SUBMIT` não contém dígitos; o programa o trata como um documento vazio. Assim, se o arquivo de exemplo for copiado e esquecido, esses registros não entram na fila de envio automático. Mesmo assim, nunca envie dados fictícios ao portal.
+O texto `DOCUMENT_PLACEHOLDER_DO_NOT_SUBMIT` não contém dígitos; o programa o trata como um documento vazio. Assim, os passageiros de exemplo não entram na fila de envio automático. Mesmo assim, nunca envie dados fictícios ao portal.
 
 **Colunas:**
 
 - `name` (**obrigatória**): nome que será digitado no formulário.
-- `document` (**recomendada**): número a ser digitado no campo de documento. Pontuação e letras são removidas; o valor não é validado. Preserve zeros iniciais configurando a coluna como texto no editor de planilhas.
-- `original_order` (opcional): referência para manter a ordem da lista; não altera o preenchimento.
+- `document` (**recomendada**): número que será digitado no campo de documento. Pontuação e letras são removidas; o valor não é validado. Preserve zeros iniciais configurando a coluna como texto no editor de planilhas.
 
-Para compatibilidade, também são aceitos os cabeçalhos antigos em português `nome`, `documento`, `cpf` e `ordem_original`. Para novas listas, prefira `name`, `document` e `original_order`.
+Para compatibilidade, também são aceitos os cabeçalhos antigos em português `nome`, `documento` e `cpf`.
 
 Linhas com nome preenchido e documento vazio são contabilizadas, mas **não são enviadas automaticamente**. Linhas sem nome são ignoradas.
 
@@ -186,7 +186,7 @@ run.bat --csv passageiros.csv --issuer SSP
 
 Também é possível executar diretamente o Python do ambiente virtual:
 
-**MacOS/Linux:**
+**macOS/Linux:**
 
 ```bash
 .venv/bin/python main.py --csv passageiros.csv --issuer SSP
@@ -240,7 +240,7 @@ O registro oficial no portal é a referência final, não apenas a mensagem do t
 
 ## Privacidade e Git
 
-O `.gitignore` ignora arquivos CSV e planilhas locais, ambientes virtuais, arquivos de configuração sensíveis, chaves e capturas de tela. A única exceção CSV versionada é `/passengers.example.csv`, que contém marcadores fictícios.
+O `.gitignore` ignora arquivos CSV e planilhas locais, ambientes virtuais, arquivos de configuração sensíveis, chaves e capturas de tela. A única exceção CSV versionada é `passengers.example.csv`, que contém marcadores fictícios.
 
 O `.gitignore` ajuda a evitar publicações acidentais, mas não é uma garantia de segurança:
 
