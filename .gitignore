@@ -1,0 +1,36 @@
+# Python environments and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.log
+.DS_Store
+Thumbs.db
+
+# Local secrets and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local data files: allow only the fictional example tracked in Git
+*.csv
+!/passengers.example.csv
+*.tsv
+*.xlsx
+*.xls
+*.ods
+*.xlsm
+
+# Extra patterns for personal-data files
+*_local.*
+*_real.*
+*personal_data*
+*real_passengers*
+
+# Screenshots and artifacts that may contain personal data
+screenshots/
+captures/
